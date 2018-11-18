@@ -32,6 +32,11 @@ exports.htmlToJson = function(htmlFile) {
           }
           return undefined;
         }
+
+        function getDate(data){
+          var splitData = data.split('/');
+          return new Date(splitData[2], splitData[1] - 1, splitData[0]);
+        }
   
         let trs = $('tr');        
 
@@ -64,11 +69,12 @@ exports.htmlToJson = function(htmlFile) {
               var ganhadores = [];
               var rateio = [];
               
+              sorteio.CodigoLoteria = 1;
               sorteio.NomeLoteria = "Mega-Sena";
               sorteio.CorPadrao = "#3B815F";
               sorteio.QtdDezenasTotal = 60;
               sorteio.Concurso = downloader.parseToInt(getText(tds[0]));
-              sorteio.DataSorteio = getText(tds[1]);
+              sorteio.DataSorteio = getDate(getText(tds[1]));
               var i;
               for(i = 2; i < numDezenas + 2; i++){  
                 dezenas.push(downloader.parseToInt(getText(tds[i])));

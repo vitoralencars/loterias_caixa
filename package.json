@@ -12,7 +12,9 @@
   "dependencies": {
     "adm-zip": "^0.4.13",
     "cheerio": "^1.0.0-rc.2",
+    "nodemon": "^1.18.6",
     "path": "^0.12.7",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "restify": "^7.2.3"
   }
 }
