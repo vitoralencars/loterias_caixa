@@ -1,4 +1,5 @@
 var downloader = require('./../util/downloader');
+var request = require('request');
 
 exports.downloadResultadosLoteria = function(folder, url, indicadorLoteria, htm) {
     return downloader.downloadResultados(folder, url, indicadorLoteria, htm);
@@ -72,7 +73,7 @@ exports.htmlToJson = function(htmlFile) {
                     
                     sorteio.CodigoLoteria = 2;
                     sorteio.NomeLoteria = "Lotofácil";
-                    sorteio.CorPadrao = "#A50662";
+                    sorteio.CorPadrao = "#B93097";
                     sorteio.QtdDezenasTotal = 25;
                     sorteio.Concurso = downloader.parseToInt(getText(tds[0]));
                     sorteio.DataSorteio = getDate(getText(tds[1]));
@@ -115,10 +116,18 @@ exports.htmlToJson = function(htmlFile) {
         
         });
 
-        sorteio.Cidades = cidades;
-        sorteio.Estados = estados;
+        request.get("https://www.lotodicas.com.br/api/lotofacil", (error, response, body) => {
+          if(error) {
+            sorteio.ProximoSorteio = null;
+          }else{
+            auxData = JSON.parse(body).proximo_data.split('-');
+            dataProximoSorteio = auxData[2] + "/" + auxData[1] + "/" + auxData[0];
 
-        resolve(sorteio);
+            sorteio.ProximoSorteio = getDate(dataProximoSorteio);
+          }
+
+          resolve(sorteio);
+        });
       });
     });
   }

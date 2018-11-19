@@ -63,17 +63,17 @@ exports.htmlToJson = function(htmlFile) {
           if (ultimoIndex === index) {
 
             var tds = $(this).find('td');
-            var numDezenas = 6;
+            var numDezenas = 5;
           
             if (tds && tds.length > 0) {            
               var dezenas = [];
               var ganhadores = [];
               var rateio = [];
               
-              sorteio.CodigoLoteria = 1;
-              sorteio.NomeLoteria = "Mega-Sena";
-              sorteio.CorPadrao = "#3B815F";
-              sorteio.QtdDezenasTotal = 60;
+              sorteio.CodigoLoteria = 3;
+              sorteio.NomeLoteria = "Quina";
+              sorteio.CorPadrao = "#434375";
+              sorteio.QtdDezenasTotal = 80;
               sorteio.Concurso = downloader.parseToInt(getText(tds[0]));
               sorteio.DataSorteio = getDate(getText(tds[1]));
               var i;
@@ -88,16 +88,18 @@ exports.htmlToJson = function(htmlFile) {
               ganhadores.push(downloader.parseToInt(getText(tds[i + 1])));
               ganhadores.push(downloader.parseToInt(getText(tds[i + 5])));
               ganhadores.push(downloader.parseToInt(getText(tds[i + 7])));
+              ganhadores.push(downloader.parseToInt(getText(tds[i + 9])));
               sorteio.Ganhadores = ganhadores;
 
               rateio.push(downloader.parseToFloat(getText(tds[i + 4])));
               rateio.push(downloader.parseToFloat(getText(tds[i + 6])));
               rateio.push(downloader.parseToFloat(getText(tds[i + 8])));
+              rateio.push(downloader.parseToFloat(getText(tds[i + 10])));
               sorteio.Rateio = rateio;
             
-              sorteio.ValorAcumulado = downloader.parseToFloat(getText(tds[i + 10]));
-              sorteio.EstimativaPremio = downloader.parseToFloat(getText(tds[i + 11]));
-              sorteio.AcumuladoMegaDaVirada = downloader.parseToFloat(getText(tds[i + 12]));    
+              sorteio.ValorAcumulado = downloader.parseToFloat(getText(tds[i + 12]));
+              sorteio.EstimativaPremio = downloader.parseToFloat(getText(tds[i + 13]));
+              sorteio.AcumuladoSaoJoao = downloader.parseToFloat(getText(tds[i + 14]));    
             }
 
             if(tds && indexLocais === index){
@@ -111,8 +113,8 @@ exports.htmlToJson = function(htmlFile) {
 
         sorteio.Cidades = cidades;
         sorteio.Estados = estados;
-
-        request.get("https://www.lotodicas.com.br/api/mega-sena", (error, response, body) => {
+        
+        request.get("https://www.lotodicas.com.br/api/quina", (error, response, body) => {
           if(error) {
             sorteio.ProximoSorteio = null;
           }else{

@@ -19,3 +19,23 @@ exports.lotofacilJson = function(tempDirectory) {
       return lotofacil.htmlToJson(nomeArquivoComResultados);
     });
 };
+
+exports.quinaJson = function(tempDirectory) {
+  let quina = require('./leitura_arquivo/quina');
+  const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_quina.zip';
+
+  return quina.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_quina', 'D_QUINA.HTM')
+    .then(function(nomeArquivoComResultados) {
+      return quina.htmlToJson(nomeArquivoComResultados);
+    });
+};
+
+exports.lotomaniaJson = function(tempDirectory) {
+  let lotomania = require('./leitura_arquivo/lotomania');
+  const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_lotoma.zip';
+
+  return lotomania.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_lotoma', 'D_LOTMAN.HTM')
+    .then(function(nomeArquivoComResultados) {
+      return lotomania.htmlToJson(nomeArquivoComResultados);
+    });
+};
