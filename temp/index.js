@@ -10,6 +10,10 @@ server.get('/ultimosresultados', (req, res) => {
     getUltimosResultadosLoterias(res);
 });
 
+server.get('/loteria/:idloteria/:concurso', (req, res) => {
+    getResultadosLoteria(res, parseInt(req.params.idloteria), parseInt(req.params.concurso));
+});
+
 server.listen(3000, () => {
     
 });
@@ -21,10 +25,14 @@ listarUltimosResultadosLoterias = function(res, resultados){
     }
 }
 
+getResultadoConcurso = function(res, resultado){
+    res.send(resultado);
+}
+
 getUltimosResultadosLoterias = function(res){
     var resultados = [];
 
-    loterias.megasenaJson(diretorioTemporario)
+    loterias.megasenaJson(diretorioTemporario, -1)
         .then((jsonArray)=>{
             resultados.push(jsonArray);
             listarUltimosResultadosLoterias(res, resultados);
@@ -40,7 +48,7 @@ getUltimosResultadosLoterias = function(res){
             console.debug(err);
         })
 
-    loterias.quinaJson(diretorioTemporario)
+    loterias.quinaJson(diretorioTemporario, -1)
         .then((jsonArray)=>{
             resultados.push(jsonArray);
             listarUltimosResultadosLoterias(res, resultados);
@@ -58,3 +66,39 @@ getUltimosResultadosLoterias = function(res){
     
 }
 
+getResultadosLoteria = function(res, loteria, concurso){
+    switch(loteria){
+        case 1:
+            loterias.megasenaJson(diretorioTemporario, concurso)
+                .then((jsonArray)=>{
+                    getResultadoConcurso(res, jsonArray);
+                }).catch((err)=>{
+                    console.debug(err);
+                })
+            break;
+        case 2:
+            loterias.lotofacilJson(diretorioTemporario, concurso)
+                .then((jsonArray)=>{
+                    getResultadoConcurso(res, jsonArray);
+                }).catch((err)=>{
+                    console.debug(err);
+                })
+            break;
+        case 3:
+            loterias.quinaJson(diretorioTemporario, concurso)
+                .then((jsonArray)=>{
+                    getResultadoConcurso(res, jsonArray);
+                }).catch((err)=>{
+                    console.debug(err);
+                })
+            break;
+        case 4:
+            loterias.lotomaniaJson(diretorioTemporario, concurso)
+                .then((jsonArray)=>{
+                    getResultadoConcurso(res, jsonArray);
+                }).catch((err)=>{
+                    console.debug(err);
+                })
+            break;    
+    }
+}

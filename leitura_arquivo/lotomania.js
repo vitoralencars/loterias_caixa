@@ -13,9 +13,9 @@ exports.htmlToJson = function(htmlFile) {
     // Cria a Promise
     return new Promise(function(resolve, reject) {
   
-      // Processa o  arquivo
-      fs = require('fs');
-      fs.readFile(htmlFile, 'latin1', function(err, html) {
+        // Processa o  arquivo
+        fs = require('fs');
+        fs.readFile(htmlFile, 'latin1', function(err, html) {
   
         if (err) {
           console.error(err);
@@ -51,7 +51,7 @@ exports.htmlToJson = function(htmlFile) {
             
           var tds = $(this).find('td');
 
-          if(tds.length > 2){
+          if(tds && tds.length > 2){
               ultimoIndex = index;
               indexLocais = index + 1;
           }
