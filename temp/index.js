@@ -40,7 +40,7 @@ getUltimosResultadosLoterias = function(res){
             console.debug(err);
         })
 
-    loterias.lotofacilJson(diretorioTemporario)
+    loterias.lotofacilJson(diretorioTemporario, -1)
         .then((jsonArray)=>{
             resultados.push(jsonArray);
             listarUltimosResultadosLoterias(res, resultados);
@@ -56,7 +56,7 @@ getUltimosResultadosLoterias = function(res){
             console.debug(err);
         })
 
-    loterias.lotomaniaJson(diretorioTemporario)
+    loterias.lotomaniaJson(diretorioTemporario, -1)
         .then((jsonArray)=>{
             resultados.push(jsonArray);
             listarUltimosResultadosLoterias(res, resultados);

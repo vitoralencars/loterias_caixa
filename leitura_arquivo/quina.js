@@ -102,14 +102,16 @@ exports.htmlToJson = function(htmlFile, concurso) {
                 sorteio.EstimativaPremio = downloader.parseToFloat(getText(tds[i + 13]));
                 sorteio.AcumuladoSaoJoao = downloader.parseToFloat(getText(tds[i + 14]));    
 
-                if(tds && indexLocais === index){
-                    cidades.push(getText(tds[0]));
-                    estados.push(getText(tds[1]));
-    
-                    indexLocais ++;
-                } 
+                indexLocais = index;
             }   
             
+            if(tds && index === indexLocais + 1 && tds.length <= 2){
+              cidades.push(getText(tds[0]));
+              estados.push(getText(tds[1]));
+  
+              indexLocais ++;
+            }
+
         });
 
         sorteio.Cidades = cidades;

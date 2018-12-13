@@ -16,7 +16,7 @@ exports.lotofacilJson = function(tempDirectory, concurso) {
 
   return lotofacil.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_lotfac', 'D_LOTFAC.HTM')
     .then(function(nomeArquivoComResultados) {
-      return lotofacil.htmlToJson(nomeArquivoComResultados);
+      return lotofacil.htmlToJson(nomeArquivoComResultados, concurso);
     });
 };
 
@@ -30,12 +30,12 @@ exports.quinaJson = function(tempDirectory, concurso) {
     });
 };
 
-exports.lotomaniaJson = function(tempDirectory,) {
+exports.lotomaniaJson = function(tempDirectory, concurso) {
   let lotomania = require('./leitura_arquivo/lotomania');
   const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_lotoma.zip';
 
   return lotomania.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_lotoma', 'D_LOTMAN.HTM')
     .then(function(nomeArquivoComResultados) {
-      return lotomania.htmlToJson(nomeArquivoComResultados);
+      return lotomania.htmlToJson(nomeArquivoComResultados, concurso);
     });
 };
