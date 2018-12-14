@@ -64,18 +64,18 @@ exports.htmlToJson = function(htmlFile, concurso) {
 
           if (tds && tds.length > 0 && ((concurso === -1 && ultimoIndex === index) || concurso === downloader.parseToInt(getText(tds[0])))) {
 
-            var numDezenas = 20;        
+            var numDezenas = 7;        
             var dezenas = [];
             var ganhadores = [];
             var rateio = [];
             
-            sorteio.CodigoLoteria = 4;
-            sorteio.NomeLoteria = "Lotomania";
-            sorteio.CorPadrao = "#E1753B";
-            sorteio.CorSecundaria = "#FFFFFF";
-            sorteio.QtdMinimaDezenasAposta = 50;
-            sorteio.QtdMaximaDezenasAposta = 50;
-            sorteio.QtdDezenasTotal = 100;
+            sorteio.CodigoLoteria = 5;
+            sorteio.NomeLoteria = "Timemania";
+            sorteio.CorPadrao = "#3B815F";
+            sorteio.CorSecundaria = "#F6E700";
+            sorteio.QtdMinimaDezenasAposta = 10;
+            sorteio.QtdMaximaDezenasAposta = 10;
+            sorteio.QtdDezenasTotal = 80;
             sorteio.Concurso = downloader.parseToInt(getText(tds[0]));
             sorteio.DataSorteio = getDate(getText(tds[1]));
             var i;
@@ -83,30 +83,30 @@ exports.htmlToJson = function(htmlFile, concurso) {
               dezenas.push(downloader.parseToInt(getText(tds[i])));
             }
             sorteio.Dezenas = dezenas;
-            sorteio.ArrecadacaoTotal = downloader.parseToFloat(getText(tds[i]));
-            cidades.push(getText(tds[i + 2]));
-            estados.push(getText(tds[i + 3]));
+            sorteio.TimeCoracao = getText(tds[i]);
+            sorteio.ArrecadacaoTotal = downloader.parseToFloat(getText(tds[i + 1]));
+            cidades.push(getText(tds[i + 3]));
+            estados.push(getText(tds[i + 4]));
             
-            ganhadores.push(downloader.parseToInt(getText(tds[i + 1])));
-            ganhadores.push(downloader.parseToInt(getText(tds[i + 4])));
+            ganhadores.push(downloader.parseToInt(getText(tds[i + 2])));
             ganhadores.push(downloader.parseToInt(getText(tds[i + 5])));
             ganhadores.push(downloader.parseToInt(getText(tds[i + 6])));
             ganhadores.push(downloader.parseToInt(getText(tds[i + 7])));
             ganhadores.push(downloader.parseToInt(getText(tds[i + 8])));
+            ganhadores.push(downloader.parseToInt(getText(tds[i + 9])));
             sorteio.Ganhadores = ganhadores;
 
-            rateio.push(downloader.parseToFloat(getText(tds[i + 9])));
             rateio.push(downloader.parseToFloat(getText(tds[i + 10])));
             rateio.push(downloader.parseToFloat(getText(tds[i + 11])));
             rateio.push(downloader.parseToFloat(getText(tds[i + 12])));
             rateio.push(downloader.parseToFloat(getText(tds[i + 13])));
             rateio.push(downloader.parseToFloat(getText(tds[i + 14])));
+            rateio.push(downloader.parseToFloat(getText(tds[i + 15])));
             sorteio.Rateio = rateio;
 
-            sorteio.ValorAcumulado = downloader.parseToFloat(getText(tds[i + 15]));
-            sorteio.ValorAcumuladoNenhum = downloader.parseToFloat(getText(tds[i + 20]));
+            sorteio.ValorAcumulado = downloader.parseToFloat(getText(tds[i + 16]));
           
-            sorteio.EstimativaPremio = downloader.parseToFloat(getText(tds[i + 21]));
+            sorteio.EstimativaPremio = downloader.parseToFloat(getText(tds[i + 17]));
 
             indexLocais = index;
           

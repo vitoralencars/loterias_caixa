@@ -72,6 +72,7 @@ exports.htmlToJson = function(htmlFile, concurso) {
                 sorteio.CodigoLoteria = 3;
                 sorteio.NomeLoteria = "Quina";
                 sorteio.CorPadrao = "#434375";
+                sorteio.CorSecundaria = "#FFFFFF";
                 sorteio.QtdMinimaDezenasAposta = 5;
                 sorteio.QtdMaximaDezenasAposta = 15;
                 sorteio.QtdDezenasTotal = 80;

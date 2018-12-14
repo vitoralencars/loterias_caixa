@@ -39,3 +39,23 @@ exports.lotomaniaJson = function(tempDirectory, concurso) {
       return lotomania.htmlToJson(nomeArquivoComResultados, concurso);
     });
 };
+
+exports.timemaniaJson = function(tempDirectory, concurso) {
+  let timemania = require('./leitura_arquivo/timemania');
+  const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_timema.zip';
+
+  return timemania.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_timema', 'D_TIMEMA.HTM')
+    .then(function(nomeArquivoComResultados) {
+      return timemania.htmlToJson(nomeArquivoComResultados, concurso);
+    });
+};
+
+/*exports.duplasenaJson = function(tempDirectory, concurso) {
+  let lotomania = require('./leitura_arquivo/lotomania');
+  const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_lotoma.zip';
+
+  return lotomania.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_lotoma', 'D_LOTMAN.HTM')
+    .then(function(nomeArquivoComResultados) {
+      return lotomania.htmlToJson(nomeArquivoComResultados, concurso);
+    });
+};*/

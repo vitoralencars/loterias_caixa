@@ -72,6 +72,7 @@ exports.htmlToJson = function(htmlFile, concurso) {
             sorteio.CodigoLoteria = 2;
             sorteio.NomeLoteria = "Lotofácil";
             sorteio.CorPadrao = "#B93097";
+            sorteio.CorSecundaria = "#FFFFFF";
             sorteio.QtdMinimaDezenasAposta = 15;
             sorteio.QtdMaximaDezenasAposta = 18;
             sorteio.QtdDezenasTotal = 25;
@@ -116,8 +117,6 @@ exports.htmlToJson = function(htmlFile, concurso) {
           } 
 
       });
-
-      console.log(cidades)
 
       sorteio.Cidades = cidades;
       sorteio.Estados = estados;

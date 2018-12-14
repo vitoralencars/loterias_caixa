@@ -72,6 +72,7 @@ exports.htmlToJson = function(htmlFile, concurso) {
             sorteio.CodigoLoteria = 1;
             sorteio.NomeLoteria = "Mega-Sena";
             sorteio.CorPadrao = "#3B815F";
+            sorteio.CorSecundaria = "#FFFFFF";
             sorteio.QtdMinimaDezenasAposta = 6;
             sorteio.QtdMaximaDezenasAposta = 15;
             sorteio.QtdDezenasTotal = 60;
@@ -114,7 +115,7 @@ exports.htmlToJson = function(htmlFile, concurso) {
         sorteio.Cidades = cidades;
         sorteio.Estados = estados;
 
-        request.get("https://www.lotodicas.com.br/api/mega-sena", (error, response, body) => {
+        request.get("https://www.lotodicas.com.br/api/timemania", (error, response, body) => {
           if(error) {
             sorteio.ProximoSorteio = null;
           }else{

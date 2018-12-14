@@ -19,7 +19,7 @@ server.listen(3000, () => {
 });
 
 listarUltimosResultadosLoterias = function(res, resultados){
-    if(resultados.length == 4){
+    if(resultados.length == 5){
         resultados.sort(function(a, b){return a.CodigoLoteria - b.CodigoLoteria});
         res.send(resultados);
     }
@@ -63,6 +63,14 @@ getUltimosResultadosLoterias = function(res){
         }).catch((err)=>{
             console.debug(err);
         })
+
+    loterias.timemaniaJson(diretorioTemporario, -1)
+        .then((jsonArray)=>{
+            resultados.push(jsonArray);
+            listarUltimosResultadosLoterias(res, resultados);
+        }).catch((err)=>{
+            console.debug(err);
+        })
     
 }
 
@@ -94,6 +102,14 @@ getResultadosLoteria = function(res, loteria, concurso){
             break;
         case 4:
             loterias.lotomaniaJson(diretorioTemporario, concurso)
+                .then((jsonArray)=>{
+                    getResultadoConcurso(res, jsonArray);
+                }).catch((err)=>{
+                    console.debug(err);
+                })
+            break;
+        case 5:
+            loterias.timemaniaJson(diretorioTemporario, concurso)
                 .then((jsonArray)=>{
                     getResultadoConcurso(res, jsonArray);
                 }).catch((err)=>{
