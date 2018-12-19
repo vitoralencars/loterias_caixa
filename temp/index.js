@@ -23,9 +23,20 @@ server.listen(3000, () => {
 });
 
 listarUltimosResultadosLoterias = function(res, resultados){
-    if(resultados.length == 5){
+    if(resultados.length == 6){
         resultados.sort(function(a, b){return a.CodigoLoteria - b.CodigoLoteria});
-        res.send(resultados);
+
+        var loteriasComuns = [];
+        for(var i = 0; i < 5; i++){
+            loteriasComuns.push(resultados[i]);
+        }
+
+        var todasLoterias = {
+            'LoteriasComuns' : loteriasComuns,
+            'DuplaSena' : resultados[5]
+        }
+
+        res.send(todasLoterias);
     }
 }
 
@@ -75,6 +86,15 @@ getUltimosResultadosLoterias = function(res){
         }).catch((err)=>{
             console.debug(err);
         })
+
+    loterias.duplasenaJson(diretorioTemporario, -1)
+        .then((jsonArray)=>{
+            resultados.push(jsonArray);
+            listarUltimosResultadosLoterias(res, resultados);
+        }).catch((err)=>{
+            console.debug(err);
+        })    
+        
     
 }
 
@@ -114,6 +134,14 @@ getResultadosLoteria = function(res, loteria, concurso){
             break;
         case 5:
             loterias.timemaniaJson(diretorioTemporario, concurso)
+                .then((jsonArray)=>{
+                    getResultadoConcurso(res, jsonArray);
+                }).catch((err)=>{
+                    console.debug(err);
+                })
+            break;
+        case 6:
+            loterias.duplasenaJson(diretorioTemporario, concurso)
                 .then((jsonArray)=>{
                     getResultadoConcurso(res, jsonArray);
                 }).catch((err)=>{

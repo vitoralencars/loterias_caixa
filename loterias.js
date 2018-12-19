@@ -50,12 +50,12 @@ exports.timemaniaJson = function(tempDirectory, concurso) {
     });
 };
 
-/*exports.duplasenaJson = function(tempDirectory, concurso) {
-  let lotomania = require('./leitura_arquivo/lotomania');
-  const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/D_lotoma.zip';
+exports.duplasenaJson = function(tempDirectory, concurso) {
+  let duplasena = require('./leitura_arquivo/duplasena');
+  const url = 'http://www1.caixa.gov.br/loterias/_arquivos/loterias/d_dplsen.zip';
 
-  return lotomania.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_lotoma', 'D_LOTMAN.HTM')
+  return duplasena.downloadResultadosLoteria(path.normalize(tempDirectory), url, 'D_dplsen', 'D_DPLSEN.HTM')
     .then(function(nomeArquivoComResultados) {
-      return lotomania.htmlToJson(nomeArquivoComResultados, concurso);
+      return duplasena.htmlToJson(nomeArquivoComResultados, concurso);
     });
-};*/
+};
