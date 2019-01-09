@@ -26,14 +26,13 @@ listarUltimosResultadosLoterias = function(res, resultados){
     if(resultados.length == 6){
         resultados.sort(function(a, b){return a.CodigoLoteria - b.CodigoLoteria});
 
-        var loteriasComuns = [];
-        for(var i = 0; i < 5; i++){
-            loteriasComuns.push(resultados[i]);
-        }
-
         var todasLoterias = {
-            'LoteriasComuns' : loteriasComuns,
-            'DuplaSena' : resultados[5]
+            'Megasena' : resultados[0],
+            'Lotofacil' : resultados[1],
+            'Quina' : resultados[2],
+            'Lotomania' : resultados[3],
+            'Timemania' : resultados[4],
+            'Duplasena' : resultados[5]
         }
 
         res.send(todasLoterias);

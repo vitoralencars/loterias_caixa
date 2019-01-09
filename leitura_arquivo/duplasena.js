@@ -70,7 +70,7 @@ exports.htmlToJson = function(htmlFile, concurso) {
             var rateio = [];
             
             sorteio.CodigoLoteria = 6;
-            sorteio.NomeLoteria = "Dupla Sena";
+            sorteio.NomeLoteria = "Dupla-Sena";
             sorteio.CorPadrao = "#911531";
             sorteio.CorSecundaria = "#FFFFFF";
             sorteio.QtdMinimaDezenasAposta = 6;
